@@ -2,18 +2,47 @@ package com.divtec.blatnoa.scannermateriel_poc.api
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import kotlinx.serialization.*
 
-class ApiManager(
-    private val url: String,
-    private val token: String)
+open class ApiManager(
+    private var url: String)
 {
     private val client = OkHttpClient()
 
-    public fun run(action: String) {
+    /**
+     * Run a request to the API
+     * @param action The action to run
+     */
+    public fun run(action: String, onApiResponseCallback: OnApiResponseCallback? = null) {
+        // Build the request
         val request = Request.Builder()
             .url(url+action)
             .build()
+
+        // Run the request
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: java.io.IOException) { // On error
+                e.printStackTrace()
+
+                // Call the error callback
+                onApiResponseCallback?.onError()
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) { // On success
+                response.use {
+                    if (!response.isSuccessful) throw java.io.IOException("Unexpected code $response")
+
+                    // Call the success callback
+                    onApiResponseCallback?.onSuccess(response)
+                }
+            }
+        })
+    }
+
+    /**
+     * Get the url of the API
+     */
+    public fun getUri(): String {
+        return url
     }
 
 }
