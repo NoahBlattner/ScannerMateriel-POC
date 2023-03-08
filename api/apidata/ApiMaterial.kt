@@ -1,0 +1,12 @@
+package com.divtec.blatnoa.scannermateriel_poc.api.apidata
+
+@kotlinx.serialization.Serializable
+data class ApiMaterial(
+    val id: Int,
+    val categorie: String,
+    val nom: String,
+    val type: String,
+    val marque: String,
+    val modele: String,
+    val n_serie: String,
+)
