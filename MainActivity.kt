@@ -6,14 +6,17 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.divtec.blatnoa.scannermateriel_poc.api_activity.ApiActivity
 
 class MainActivity : AppCompatActivity() {
 
     private val ACTION_STRING = "com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED"
 
     private lateinit var scanText: TextView
+    private lateinit var apiButton: Button
 
     private lateinit var receiver: BroadcastReceiver
 
@@ -23,6 +26,15 @@ class MainActivity : AppCompatActivity() {
 
         // Find the components
         scanText = findViewById(R.id.scannerText)
+        apiButton = findViewById(R.id.apiButton)
+
+        // Set the button listener
+        apiButton.setOnClickListener {
+            // Create the intent
+            val intent = Intent(this, ApiActivity::class.java)
+            // Start the activity
+            startActivity(intent)
+        }
 
         // Create the broadcast receiver
         receiver = object : BroadcastReceiver() {
