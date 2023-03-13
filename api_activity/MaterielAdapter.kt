@@ -29,5 +29,9 @@ class MaterielAdapter(
         return materiels.size
     }
 
-
+    public fun setMateriels(materiels: ArrayList<ApiMateriel>) {
+        this.materiels.clear()
+        this.materiels.addAll(materiels)
+        notifyDataSetChanged()
+    }
 }

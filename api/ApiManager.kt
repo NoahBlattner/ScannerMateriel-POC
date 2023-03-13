@@ -2,6 +2,7 @@ package com.divtec.blatnoa.scannermateriel_poc.api
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 
 open class ApiManager(
     private var url: String)
@@ -12,7 +13,7 @@ open class ApiManager(
      * Run a request to the API
      * @param action The action to run
      */
-    public fun run(action: String, onApiResponseCallback: OnApiResponseCallback? = null) {
+    public fun run(action: String, onApiResponseCallback: OnApiResponseCallback<Response>? = null) {
         // Build the request
         val request = Request.Builder()
             .url(url+action)
@@ -43,6 +44,13 @@ open class ApiManager(
      */
     public fun getUri(): String {
         return url
+    }
+
+    /**
+     * Set the url of the API
+     */
+    public fun setUri(url: String) {
+        this.url = url
     }
 
 }
