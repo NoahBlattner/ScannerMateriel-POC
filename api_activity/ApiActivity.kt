@@ -51,6 +51,8 @@ class ApiActivity : AppCompatActivity() {
                         "Error while loading the list of materials" + response?.code,
                         Toast.LENGTH_SHORT)
                         .show()
+
+                    modifyApiUrl()
                 })
             }
         })

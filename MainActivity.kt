@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         // Find the components
         scanText = findViewById(R.id.scannerText)
         apiButton = findViewById(R.id.apiButton)
-        nfcButton = findViewById(R.id.nfcTestButton)
 
         // Create the broadcast receiver
         receiver = object : BroadcastReceiver() {
@@ -58,13 +57,6 @@ class MainActivity : AppCompatActivity() {
         apiButton.setOnClickListener {
             // Create the intent
             val intent = Intent(this, ApiActivity::class.java)
-            // Start the activity
-            startActivity(intent)
-        }
-
-        nfcButton.setOnClickListener {
-            // Create the intent
-            val intent = Intent(this, NfcReadActivity::class.java)
             // Start the activity
             startActivity(intent)
         }
