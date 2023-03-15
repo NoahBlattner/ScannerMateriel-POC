@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var scanText: TextView
     private lateinit var apiButton: Button
+    private lateinit var nfcButton: Button
 
     private lateinit var receiver: BroadcastReceiver
 
@@ -31,14 +32,7 @@ class MainActivity : AppCompatActivity() {
         // Find the components
         scanText = findViewById(R.id.scannerText)
         apiButton = findViewById(R.id.apiButton)
-
-        // Set the button listener
-        apiButton.setOnClickListener {
-            // Create the intent
-            val intent = Intent(this, ApiActivity::class.java)
-            // Start the activity
-            startActivity(intent)
-        }
+        nfcButton = findViewById(R.id.nfcTestButton)
 
         // Create the broadcast receiver
         receiver = object : BroadcastReceiver() {
@@ -55,6 +49,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         registerScannerReceiver(receiver)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // Set the button listener
+        apiButton.setOnClickListener {
+            // Create the intent
+            val intent = Intent(this, ApiActivity::class.java)
+            // Start the activity
+            startActivity(intent)
+        }
+
+        nfcButton.setOnClickListener {
+            // Create the intent
+            val intent = Intent(this, NfcReadActivity::class.java)
+            // Start the activity
+            startActivity(intent)
+        }
     }
 
     /**
